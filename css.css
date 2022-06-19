@@ -1,4 +1,32 @@
-#HolaSidebar > p, #HolaSidebar > h1, #HolaSidebar > h2{
+#HolaSidebar > p, #HolaSidebar > h1, #HolaSidebar > h2, #HolaSidebar > .hola-panel{
     color:white;
-    
 }
+
+.hola-accordion {
+    background-color: rgb(40, 40, 40);
+    color: #ffffff;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+  }
+  
+  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+  .hola-active, .hola-accordion:hover {
+    background-color: #000;
+  }
+  
+  /* Style the accordion panel. Note: hidden by default */
+  .hola-panel {
+    padding: 0 18px;
+    background-color: rgb(30, 30, 30);
+    display: none;
+    overflow: hidden;
+  }
+
+  .hola-black{
+    color: black;
+  }

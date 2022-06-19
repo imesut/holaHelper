@@ -1,0 +1,418 @@
+{
+    "language": "en",
+    "textAngle": 0.0,
+    "orientation": "Up",
+    "regions": [
+        {
+            "boundingBox": "101,157,2118,796",
+            "lines": [
+                {
+                    "boundingBox": "101,157,251,77",
+                    "words": [
+                        {
+                            "boundingBox": "101,157,251,77",
+                            "text": "bunnie"
+                        }
+                    ]
+                },
+                {
+                    "boundingBox": "218,352,1965,48",
+                    "words": [
+                        {
+                            "boundingBox": "218,353,142,38",
+                            "text": "bunnie"
+                        },
+                        {
+                            "boundingBox": "377,354,32,37",
+                            "text": "is"
+                        },
+                        {
+                            "boundingBox": "427,353,90,38",
+                            "text": "best"
+                        },
+                        {
+                            "boundingBox": "534,353,138,38",
+                            "text": "known"
+                        },
+                        {
+                            "boundingBox": "689,352,60,39",
+                            "text": "for"
+                        },
+                        {
+                            "boundingBox": "765,353,165,47",
+                            "text": "hackinq"
+                        },
+                        {
+                            "boundingBox": "945,353,68,38",
+                            "text": "the"
+                        },
+                        {
+                            "boundingBox": "1031,352,206,39",
+                            "text": "Microsoft"
+                        },
+                        {
+                            "boundingBox": "1252,353,117,44",
+                            "text": "Xbox,"
+                        },
+                        {
+                            "boundingBox": "1386,363,47,28",
+                            "text": "as"
+                        },
+                        {
+                            "boundingBox": "1448,353,83,38",
+                            "text": "well"
+                        },
+                        {
+                            "boundingBox": "1549,363,48,28",
+                            "text": "as"
+                        },
+                        {
+                            "boundingBox": "1612,352,61,39",
+                            "text": "for"
+                        },
+                        {
+                            "boundingBox": "1688,353,60,38",
+                            "text": "his"
+                        },
+                        {
+                            "boundingBox": "1764,352,144,39",
+                            "text": "efforts"
+                        },
+                        {
+                            "boundingBox": "1925,354,33,36",
+                            "text": "in"
+                        },
+                        {
+                            "boundingBox": "1975,353,208,47",
+                            "text": "designing"
+                        }
+                    ]
+                },
+                {
+                    "boundingBox": "217,419,1971,50",
+                    "words": [
+                        {
+                            "boundingBox": "217,421,76,38",
+                            "text": "and"
+                        },
+                        {
+                            "boundingBox": "312,420,314,48",
+                            "text": "manufacturing"
+                        },
+                        {
+                            "boundingBox": "643,431,104,37",
+                            "text": "open"
+                        },
+                        {
+                            "boundingBox": "765,431,145,28",
+                            "text": "source"
+                        },
+                        {
+                            "boundingBox": "927,421,208,44",
+                            "text": "hardware,"
+                        },
+                        {
+                            "boundingBox": "1153,421,192,47",
+                            "text": "including"
+                        },
+                        {
+                            "boundingBox": "1360,421,68,38",
+                            "text": "the"
+                        },
+                        {
+                            "boundingBox": "1444,421,171,48",
+                            "text": "chumby"
+                        },
+                        {
+                            "boundingBox": "1631,419,262,50",
+                            "text": "(app-playing"
+                        },
+                        {
+                            "boundingBox": "1911,421,120,38",
+                            "text": "alarm"
+                        },
+                        {
+                            "boundingBox": "2048,419,140,50",
+                            "text": "clock),"
+                        }
+                    ]
+                },
+                {
+                    "boundingBox": "217,486,2002,51",
+                    "words": [
+                        {
+                            "boundingBox": "217,489,250,38",
+                            "text": "chibitronics"
+                        },
+                        {
+                            "boundingBox": "485,486,318,51",
+                            "text": "(peel-and-stick"
+                        },
+                        {
+                            "boundingBox": "818,489,236,38",
+                            "text": "electronics"
+                        },
+                        {
+                            "boundingBox": "1070,488,60,39",
+                            "text": "for"
+                        },
+                        {
+                            "boundingBox": "1145,487,124,50",
+                            "text": "craft),"
+                        },
+                        {
+                            "boundingBox": "1286,489,76,38",
+                            "text": "and"
+                        },
+                        {
+                            "boundingBox": "1377,489,68,38",
+                            "text": "the"
+                        },
+                        {
+                            "boundingBox": "1463,491,160,36",
+                            "text": "Novena"
+                        },
+                        {
+                            "boundingBox": "1641,491,71,35",
+                            "text": "DIY"
+                        },
+                        {
+                            "boundingBox": "1728,489,143,47",
+                            "text": "laptop."
+                        },
+                        {
+                            "boundingBox": "1891,491,56,36",
+                            "text": "He"
+                        },
+                        {
+                            "boundingBox": "1964,489,177,38",
+                            "text": "received"
+                        },
+                        {
+                            "boundingBox": "2159,489,60,38",
+                            "text": "his"
+                        }
+                    ]
+                },
+                {
+                    "boundingBox": "218,556,1978,49",
+                    "words": [
+                        {
+                            "boundingBox": "218,557,84,37",
+                            "text": "PhD"
+                        },
+                        {
+                            "boundingBox": "321,558,32,36",
+                            "text": "in"
+                        },
+                        {
+                            "boundingBox": "372,559,51,35",
+                            "text": "EE"
+                        },
+                        {
+                            "boundingBox": "438,556,100,39",
+                            "text": "from"
+                        },
+                        {
+                            "boundingBox": "557,559,81,35",
+                            "text": "MIT"
+                        },
+                        {
+                            "boundingBox": "654,558,33,36",
+                            "text": "in"
+                        },
+                        {
+                            "boundingBox": "704,558,118,37",
+                            "text": "2002."
+                        },
+                        {
+                            "boundingBox": "842,559,56,36",
+                            "text": "He"
+                        },
+                        {
+                            "boundingBox": "913,557,188,48",
+                            "text": "currently"
+                        },
+                        {
+                            "boundingBox": "1117,557,94,38",
+                            "text": "lives"
+                        },
+                        {
+                            "boundingBox": "1229,558,32,36",
+                            "text": "in"
+                        },
+                        {
+                            "boundingBox": "1278,558,218,46",
+                            "text": "Singapore"
+                        },
+                        {
+                            "boundingBox": "1510,557,131,38",
+                            "text": "where"
+                        },
+                        {
+                            "boundingBox": "1657,557,49,38",
+                            "text": "he"
+                        },
+                        {
+                            "boundingBox": "1723,567,91,28",
+                            "text": "runs"
+                        },
+                        {
+                            "boundingBox": "1831,567,22,28",
+                            "text": "a"
+                        },
+                        {
+                            "boundingBox": "1871,558,144,46",
+                            "text": "private"
+                        },
+                        {
+                            "boundingBox": "2032,557,164,47",
+                            "text": "product"
+                        }
+                    ]
+                },
+                {
+                    "boundingBox": "217,625,1674,48",
+                    "words": [
+                        {
+                            "boundingBox": "217,625,140,47",
+                            "text": "design"
+                        },
+                        {
+                            "boundingBox": "375,625,142,44",
+                            "text": "studio,"
+                        },
+                        {
+                            "boundingBox": "535,626,154,46",
+                            "text": "Kosaqi,"
+                        },
+                        {
+                            "boundingBox": "705,625,77,38",
+                            "text": "and"
+                        },
+                        {
+                            "boundingBox": "800,625,49,38",
+                            "text": "he"
+                        },
+                        {
+                            "boundingBox": "865,625,163,48",
+                            "text": "actively"
+                        },
+                        {
+                            "boundingBox": "1043,629,177,34",
+                            "text": "mentors"
+                        },
+                        {
+                            "boundingBox": "1237,625,150,38",
+                            "text": "several"
+                        },
+                        {
+                            "boundingBox": "1404,629,178,43",
+                            "text": "startups"
+                        },
+                        {
+                            "boundingBox": "1599,625,76,38",
+                            "text": "and"
+                        },
+                        {
+                            "boundingBox": "1693,625,198,38",
+                            "text": "students."
+                        }
+                    ]
+                },
+                {
+                    "boundingBox": "218,782,1617,51",
+                    "words": [
+                        {
+                            "boundingBox": "218,784,241,39",
+                            "text": "Precursor:"
+                        },
+                        {
+                            "boundingBox": "477,784,119,49",
+                            "text": "Open"
+                        },
+                        {
+                            "boundingBox": "615,782,235,49",
+                            "text": "Hardware,"
+                        },
+                        {
+                            "boundingBox": "868,784,167,39",
+                            "text": "RISC-V"
+                        },
+                        {
+                            "boundingBox": "1050,782,381,51",
+                            "text": "System-on-Chip"
+                        },
+                        {
+                            "boundingBox": "1449,782,307,51",
+                            "text": "Development"
+                        },
+                        {
+                            "boundingBox": "1774,783,61,40",
+                            "text": "Kit"
+                        }
+                    ]
+                },
+                {
+                    "boundingBox": "250,854,785,36",
+                    "words": [
+                        {
+                            "boundingBox": "250,866,20,20",
+                            "text": "o"
+                        },
+                        {
+                            "boundingBox": "335,856,75,34",
+                            "text": "Can"
+                        },
+                        {
+                            "boundingBox": "426,856,61,34",
+                            "text": "We"
+                        },
+                        {
+                            "boundingBox": "504,854,95,35",
+                            "text": "Build"
+                        },
+                        {
+                            "boundingBox": "615,854,189,36",
+                            "text": "Trustable"
+                        },
+                        {
+                            "boundingBox": "820,854,215,36",
+                            "text": "Hardware?"
+                        }
+                    ]
+                },
+                {
+                    "boundingBox": "249,917,610,36",
+                    "words": [
+                        {
+                            "boundingBox": "249,929,21,20",
+                            "text": "o"
+                        },
+                        {
+                            "boundingBox": "336,919,137,34",
+                            "text": "Recent"
+                        },
+                        {
+                            "boundingBox": "485,917,75,36",
+                            "text": "talk"
+                        },
+                        {
+                            "boundingBox": "574,922,36,31",
+                            "text": "at"
+                        },
+                        {
+                            "boundingBox": "626,919,107,34",
+                            "text": "FOSS"
+                        },
+                        {
+                            "boundingBox": "749,917,110,36",
+                            "text": "North"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "modelVersion": "2021-04-01"
+}

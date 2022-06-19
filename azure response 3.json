@@ -1,0 +1,25 @@
+{
+    "objects": [
+        {
+            "rectangle": {
+                "x": 710,
+                "y": 935,
+                "w": 725,
+                "h": 270
+            },
+            "object": "cell phone",
+            "confidence": 0.726,
+            "parent": {
+                "object": "telephone",
+                "confidence": 0.735
+            }
+        }
+    ],
+    "requestId": "a1a7bb50-edbc-4ea5-b318-41224f84b671",
+    "metadata": {
+        "height": 1286,
+        "width": 2342,
+        "format": "Png"
+    },
+    "modelVersion": "2021-04-01"
+}
