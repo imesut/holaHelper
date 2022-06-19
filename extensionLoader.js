@@ -27,7 +27,7 @@ document.getElementById("HolaSidebar").innerHTML = `
 </center>
 
 <video id="webcamHola1" autoplay="true" width="280px"></video>
-<canvas id="canvasHola1" width="280" height="150"></canvas>
+<canvas id="canvasHola1" width="280" height="150" style="margin-top:-150px"></canvas>
 
 <h2>3. In-Meeting Insights</h2>
 <p id="holaMeetingInsightsLog"></p>
@@ -47,11 +47,34 @@ infoBox.style.zIndex = "1000";
 infoBox.style.padding = "10px";
 infoBox.style.display = "block";
 infoBox.id = "HolaInfoBox";
+infoBox.style.display = "none";
 document.body.appendChild(infoBox);
 infoBox.innerHTML = '<center><p style="color:white; margin: 0px" id="holaInfoBoxText">InfoBox Sample Text</p></center>';
 
 
-console.log("LOAD Started!");
+// UI Functions
+var timeoutForHidingMessage;
+
+let displayMeetingRecommendation = (message, bool) => {
+    let box = document.getElementById("HolaInfoBox");
+    let messageEl = document.getElementById("holaInfoBoxText");
+    clearTimeout(timeoutForHidingMessage);
+    box.style.display = "block";
+    messageEl.innerText = message;
+    timeoutForHidingMessage = setTimeout(() => {
+        box.style.display = "none";
+    }, 2000);
+
+    if(bool){
+        document.getElementById("holaMeetingInsightsLog").innerText += "\n" + message;
+    }
+}
+
+
+// STARTING THE GAME
+
+
+displayMeetingRecommendation("LOAD started", false);
 
 
 // INIT WEBCAMs
@@ -63,6 +86,13 @@ let widthHalo = 280
 canvasHalo.width = widthHalo;
 canvasHalo.height = heightHalo;
 
+videoHalo.addEventListener('loadedmetadata', () => {
+    rate = videoHalo.videoWidth / 280;
+    newHight = videoHalo.videoHeight / rate;
+    canvasHalo.height = newHight;
+    heightHalo = newHight;
+});
+
 
 // WEBCAM LISTENERS
 document.getElementById("holaButton1").addEventListener("click", () => {
@@ -72,16 +102,14 @@ document.getElementById("holaButton1").addEventListener("click", () => {
             })
             .then(function (stream) {
                 videoHalo.srcObject = stream;
-                heightHalo = videoHalo.videoHeight;
-                widthHalo = videoHalo.videoHeight;
-                canvasHalo.width = widthHalo;
-                canvasHalo.height = heightHalo;
             })
             .catch(function (error) {
                 console.log("Something went wrong!");
             });
     }
 });
+
+
 
 document.getElementById("holaButton2").addEventListener("click", () => {
     console.log("button click");
@@ -102,22 +130,6 @@ document.getElementById("holaButton2").addEventListener("click", () => {
 });
 
 
-
-// UI Functions
-var timeoutForHidingMessage;
-
-let displayMeetingRecommendation = (message) => {
-    let box = document.getElementById("HolaInfoBox");
-    let messageEl = document.getElementById("holaInfoBoxText");
-    clearTimeout(timeoutForHidingMessage);
-    box.style.display = "block";
-    messageEl.innerText = message;
-    timeoutForHidingMessage = setTimeout(() => {
-        box.style.display = "none";
-    }, 2000);
-
-    document.getElementById("holaMeetingInsightsLog").innerText += "\n" + message;
-}
 
 
 //UTILS
