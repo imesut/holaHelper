@@ -15,7 +15,6 @@ document.body.appendChild(sideBar);
 
 document.getElementById("HolaSidebar").innerHTML = `
 
-
 <h1>HOLA Accessibility Hub</h1>
 
 <button class="hola-accordion">Meeting Audience</button>
@@ -52,13 +51,9 @@ document.getElementById("HolaSidebar").innerHTML = `
 <button id="holaSSDescriptionButton" class="hola-black">Enable/Disable Screen Sharing Descriptions</button>
 <br><br>
 <input type="number" name="videoStreamID" id="videoStreamID" value="0" class="hola-black">
-<button id="holaSSDescriptionManual" class="hola-black">Manually Check</button>
 </center>
 <br><br>
-
-<video width="500" height="400" controls><source src="https://photo-sphere-viewer-data.netlify.app/assets/equirectangular-video/Ayutthaya_HD.mp4" type="video/mp4"></video>
-
-<canvas id="canvasHola2" width="280" height="150"></canvas>
+<canvas id="canvasHola2" width="800" height="500"></canvas>
 </div>
 
 
@@ -112,6 +107,18 @@ for (i = 0; i < acc.length; i++) {
     });
 }
 
+// var toggleSidebar = true;
+// document.getElementById("holaHide").addEventListener("click", () => {
+//     if(toggleSidebar){
+//         document.getElementById("HolaSidebar").right = "-275px";
+//         toggleSidebar = true;
+//     } else{
+//         document.getElementById("HolaSidebar").right = "0px";
+//         toggleSidebar = false;
+//     }
+    
+// })
+
 var timeoutForHidingMessage;
 
 let displayMeetingRecommendation = (message, bool) => {
@@ -128,6 +135,7 @@ let displayMeetingRecommendation = (message, bool) => {
         document.getElementById("holaMeetingInsightsLog").innerText += "\n" + message;
     }
 }
+
 
 
 // STARTING THE GAME
@@ -189,34 +197,53 @@ document.getElementById("holaButton2").addEventListener("click", () => {
 });
 
 var TakePeriodicalSS;
+var toggleSSdescription = false;
+
+var lastSSblobSize;
 
 document.getElementById("holaSSDescriptionButton").addEventListener("click", () => {
 
-    clearInterval(TakePeriodicalSS);
+    if (toggleSSdescription) {
 
-    let video_strem_no = document.getElementById("videoStreamID").value;
-    let video_ss = document.getElementsByTagName("video")[video_strem_no];
+        clearInterval(TakePeriodicalSS);
+        toggleSSdescription = false;
 
-    let canvas_ss = document.getElementById("canvasHola2");
-    let heightHaloSC = video_ss.videoHeight;
-    let widthHaloSC = video_ss.videoWidth;
-    canvas_ss.width = widthHaloSC;
-    canvas_ss.height = heightHaloSC;
-    var context_ss = canvas_sc.getContext("2d");
+    } else {
 
-    TakePeriodicalSS = setInterval(() => {
-        context_ss.drawImage(canvas_ss, 0, 0, widthHaloSC, heightHaloSC);
-        // console.log(canvas_sc.toDataURL());
+        let video_strem_no = document.getElementById("videoStreamID").value;
+        console.log(video_strem_no);
+        let video_ss = document.getElementsByTagName("video")[video_strem_no];
+        console.log(video_ss);
+        let canvas_ss = document.getElementById("canvasHola2");
+        console.log(canvas_ss);
+        var context_ss = canvas_ss.getContext("2d");
+        console.log(context_ss);
+        let heightHaloSS = video_ss.videoHeight;
+        let widthHaloSS = video_ss.videoWidth;
+        console.log(heightHaloSS, widthHaloSS);
+        canvas_ss.width = widthHaloSS;
+        canvas_ss.height = heightHaloSS;
 
-        canvas_ss.toBlob((blob) => {
-            console.log(blob);
-            blobToStream(blob)
-                .then(readerResult => azureDetectAndOCRservice(readerResult))
-                .then(responses => description(responses))
-        });
+        TakePeriodicalSS = setInterval(() => {
+            context_ss.drawImage(video_ss, 0, 0, widthHaloSS, heightHaloSS);
+            // console.log(canvas_ss.toDataURL());
+
+            canvas_ss.toBlob((blob) => {
+                if (blob.size != lastSSblobSize) {
+                    console.log(blob);
+                    blobToStream(blob)
+                        .then(readerResult => azureDetectAndOCRservice(readerResult))
+                        .then(responses => description(responses))
+                }
+                lastSSblobSize = blob.size;
+            });
 
 
-    }, 5000);
+        }, 15000);
+
+        toggleSSdescription = true;
+    }
+
 })
 
 
@@ -352,12 +379,12 @@ let description = (responses) => {
             imagesDescriptionText += " One " + name + " at the " + verticalPosition + "-" + horizontalPosition + " of the screen.";
 
         });
-        console.log(imagesDescriptionText);
-        let summary = allText + "\n" + imagesDescriptionText;
-        
+        console.log(imagesDescriptionText);   
+    }
+    let summary = allText + "\n" + imagesDescriptionText;
+
         console.log(summary);
         displayMeetingRecommendation(summary, true);
-    }
 }
 
 //description([obj1, obj2])
@@ -441,5 +468,5 @@ let azureDetectAndOCRservice = (blob) => {
             .catch(error => rej(error));
     });
 
-    return new Promise.all([ocrPromise, detectPromise]);
+    return Promise.all([ocrPromise, detectPromise]);
 }
