@@ -1,3 +1,4 @@
-#HolaSidebar > p, h1, h2{
+#HolaSidebar > p, #HolaSidebar > h1, #HolaSidebar > h2{
     color:white;
+    
 }
