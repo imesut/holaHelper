@@ -1,0 +1,34 @@
+<h1>Merhaba Dünya</h1>
+<p>Deneme</p>
+
+
+
+<script>
+    let screensharing = document.getElementsByTagName("video")[0];
+
+    var canvas_sc = document.createElement("canvas");
+    canvas_sc.id = "screensharing_canvas";
+    let heightHaloSC = screensharing.videoHeight;
+    let widthHaloSC = screensharing.videoWidth;
+    canvas_sc.width = widthHaloSC;
+    canvas_sc.height = heightHaloSC;
+    document.body.appendChild(canvas_sc);
+    var context_sc = canvas_sc.getContext("2d");
+
+
+
+
+    var TakePeriodicalSS = setInterval(function () {
+        context_sc.drawImage(screensharing, 0, 0, widthHaloSC, heightHaloSC);
+        console.log(canvas_sc.toDataURL());
+    }, 10000);
+
+    clearInterval(TakePeriodicalSS);
+
+
+    console.log("Base64 output");
+    context_sc.drawImage(screensharing, 0, 0, widthHaloSC, heightHaloSC);
+    console.log(canvas_sc.toDataURL());
+</script>
+
+

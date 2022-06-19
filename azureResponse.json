@@ -1,0 +1,19 @@
+{
+    "faces": [{
+        "age": 29,
+        "gender": "Male",
+        "faceRectangle": {
+            "left": 118,
+            "top": 50,
+            "width": 80,
+            "height": 80
+        }
+    }],
+    "requestId": "aabad0fd-58c8-4db5-890c-d9754353aeb0",
+    "metadata": {
+        "height": 150,
+        "width": 280,
+        "format": "Png"
+    },
+    "modelVersion": "2021-05-01"
+}
