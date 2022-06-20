@@ -62,11 +62,6 @@ document.getElementById("HolaSidebar").innerHTML = `
 </div>
 
 
-<button class="hola-accordion">Section 3</button>
-<div class="hola-panel">
-  <p>Lorem ipsum...</p>
-</div>
-
 
 `;
 
@@ -76,10 +71,11 @@ infoBox.style.width = "50vw";
 infoBox.style.left = "calc(100vw - 300px - 50vw - 20px)";
 infoBox.style.bottom = "110px";
 infoBox.style.position = "fixed";
-infoBox.style.backgroundColor = "#000000";
+infoBox.style.backgroundColor = "#C4314B";
 infoBox.style.zIndex = "1000";
 infoBox.style.padding = "10px";
 infoBox.style.display = "block";
+infoBox.style.borderRadius = "10px";
 infoBox.id = "HolaInfoBox";
 // infoBox.style.display = "none";
 document.body.appendChild(infoBox);
@@ -123,9 +119,9 @@ let displayMeetingRecommendation = (message, bool) => {
     clearTimeout(timeoutForHidingMessage);
     box.style.display = "block";
     messageEl.innerText = message;
-    // timeoutForHidingMessage = setTimeout(() => {
-    //     box.style.display = "none";
-    // }, 2000);
+    timeoutForHidingMessage = setTimeout(() => {
+        box.style.display = "none";
+    }, 10000);
 
     let date = new Date();
     let timeString = date.getHours()+":"+date.getMinutes();
@@ -138,10 +134,6 @@ let displayMeetingRecommendation = (message, bool) => {
 
 
 // STARTING THE GAME
-
-
-displayMeetingRecommendation("LOAD started", false);
-
 
 // INIT WEBCAMs
 var videoHalo = document.getElementById("webcamHola1");
