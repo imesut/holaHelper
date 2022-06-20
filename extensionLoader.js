@@ -463,7 +463,7 @@ let description = (responses) => {
     let summary = allText + "\n" + imagesDescriptionText;
 
         console.log(summary);
-        displayMeetingRecommendation(summary, true);
+        displayMeetingRecommendation(summary, false);
 }
 
 //description([obj1, obj2])
