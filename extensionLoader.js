@@ -1,6 +1,6 @@
 // UI DEFINTIONS
 const sideBar = document.createElement("div");
-sideBar.style.height = "calc(100vh - 110px)";
+sideBar.style.height = "calc(100vh - 210px)";
 sideBar.style.width = "300px";
 sideBar.style.right = "0px";
 sideBar.style.top = "110px";
@@ -20,11 +20,9 @@ document.getElementById("HolaSidebar").innerHTML = `
 <button class="hola-accordion">Meeting Audience</button>
 <div class="hola-panel hola-active  ">
 <br><br>
-<p>In this meeting, there are 2 visually impaired person, including 1 total blind and 1 low vision. Your accessible e-teaching recommendations will be based on these 2 attendees.</p>
+<p>In this meeting, there are <b>2 visually impaired person</b>, including <b>1 total blind and 1 low vision</b>. Your accessible e-teaching recommendations will be based on these <b>2 attendees.</b></p>
 <br><br>
-
-<p>TODO: WHO's camera is on!</p>
-
+<p>There are <b>3 participants</b> in the meeting, their cameras are <b>all open.</b></p>
 <br><br>
 </div>
 
@@ -32,14 +30,14 @@ document.getElementById("HolaSidebar").innerHTML = `
 <div class="hola-panel">
 <br><br>
 <center>
-<button id="holaButton1" class="hola-black">Enable Scene Check</button>
+<button id="holaButton1" class="hola-black">Let me Check</button>
 <br><br>
-<button id="holaButton2" class="hola-black">Check</button>
+<button id="holaButton2" class="hola-black">Enable/Disable Scene Check</button>
 </center>
 <br><br>
 
 <video id="webcamHola1" autoplay="true" width="280px"></video>
-<canvas id="canvasHola1" width="280" height="150" style="margin-top:-150px"></canvas>
+<canvas id="canvasHola1" width="280" height="150"></canvas>
 </div>
 
 <button class="hola-accordion">Accessibility Helper - Descriptions for Screen Sharing</button>
@@ -55,7 +53,6 @@ document.getElementById("HolaSidebar").innerHTML = `
 <br><br>
 <canvas id="canvasHola2" width="800" height="500"></canvas>
 </div>
-
 
 
 
@@ -75,7 +72,6 @@ document.getElementById("HolaSidebar").innerHTML = `
 
 
 const infoBox = document.createElement("div");
-infoBox.style.height = "50px";
 infoBox.style.width = "50vw";
 infoBox.style.left = "calc(100vw - 300px - 50vw - 20px)";
 infoBox.style.bottom = "110px";
@@ -131,8 +127,11 @@ let displayMeetingRecommendation = (message, bool) => {
     //     box.style.display = "none";
     // }, 2000);
 
+    let date = new Date();
+    let timeString = date.getHours()+":"+date.getMinutes();
+
     if (bool) {
-        document.getElementById("holaMeetingInsightsLog").innerText += "\n" + message;
+        document.getElementById("holaMeetingInsightsLog").innerText += "\n -->>" + timeString + " " + message;
     }
 }
 
@@ -163,6 +162,7 @@ videoHalo.addEventListener('loadedmetadata', () => {
 
 // WEBCAM LISTENERS
 document.getElementById("holaButton1").addEventListener("click", () => {
+
     if (navigator.mediaDevices.getUserMedia) {
         navigator.mediaDevices.getUserMedia({
                 video: true
@@ -177,23 +177,30 @@ document.getElementById("holaButton1").addEventListener("click", () => {
 });
 
 
+var SceneCheckPeriodicalInterval;
 
 document.getElementById("holaButton2").addEventListener("click", () => {
-    console.log("button click");
-    contextHalo.drawImage(videoHalo, 0, 0, widthHalo, heightHalo);
 
-    canvasHalo.toBlob((blob) => {
-        console.log(blob);
+    clearInterval(SceneCheckPeriodicalInterval);
 
-        blobToStream(blob)
-            .then(readerResult => goToAzureCV(readerResult))
-            .then(result => facePosition(result))
-        // const newImg = document.createElement('img');
-        // const url = URL.createObjectURL(blob);
-        // console.log("BLOB");
-        // console.log(url);
-    });
-    // console.log(canvasHalo.toDataURL());
+    SceneCheckPeriodicalInterval = setInterval(() => {
+        contextHalo.drawImage(videoHalo, 0, 0, widthHalo, heightHalo);
+        // console.log(canvas_ss.toDataURL());
+
+        canvasHalo.toBlob((blob) => {
+            console.log(blob);
+    
+            blobToStream(blob)
+                .then(readerResult => goToAzureCV(readerResult))
+                .then(result => facePosition(result))
+            // const newImg = document.createElement('img');
+            // const url = URL.createObjectURL(blob);
+            // console.log("BLOB");
+            // console.log(url);
+            // console.log(canvasHalo.toDataURL());
+        });
+    }, 1000);
+
 });
 
 var TakePeriodicalSS;
@@ -238,13 +245,31 @@ document.getElementById("holaSSDescriptionButton").addEventListener("click", () 
                 lastSSblobSize = blob.size;
             });
 
-
-        }, 15000);
+        }, 1000);
 
         toggleSSdescription = true;
     }
 
 })
+
+
+let warnings = [
+    "WARNING: Repetitive words can be distracting for persons with cognitive disabilities.",
+    "WARNING: Visually impaired people can not see the figure.",
+    "WARNING: Visually impaired people can not see the figure."
+]
+
+document.addEventListener('keydown', (event) => {
+    var keyName = event.key;
+    if(!isNaN(keyName)){ //if is number
+        displayMeetingRecommendation(warnings[keyName], false);
+        
+        var notify = new Notification('Hola', {
+            body: warnings[keyName]
+        });
+        
+    }
+  }, false);
 
 
 
@@ -265,6 +290,8 @@ let blobToStream = (blob) => {
 
 let facePosition = (response) => {
 
+    var displayText = "";
+
     console.log(response);
 
     if (response.faces.length > 0) {
@@ -279,35 +306,35 @@ let facePosition = (response) => {
 
         if (horizontalPosition < 0.35) {
             message = "Your face at the left side of the screen.";
+            displayText += message;
             console.log(message);
-            displayMeetingRecommendation(message, true);
-
-
         } else if (horizontalPosition > 0.65) {
             message = "Your face at the right side of the screen.";
+            displayText += message;
             console.log(message);
-            displayMeetingRecommendation(message, true);
         } else {
             message = "Your face at the horizontal middle of the screen.";
+            displayText += message;
             console.log(message);
-            displayMeetingRecommendation(message, true);
         }
         if (topSpacing > 10 & bottomSpacing > 10) {
             message = "Your face fits to the screen";
+            displayText += message;
             console.log(message);
-            displayMeetingRecommendation(message, true);
             togglCamByFollowingFacePosition("open");
         } else {
             message = "You can keep more vertical top and bottom spacing. Please stand a little bit far. Now top and bottom space percentags are: " + topSpacing + " " + bottomSpacing;
+            displayText += message;
             console.log(message);
-            displayMeetingRecommendation(message, true);
         }
     } else {
         togglCamByFollowingFacePosition("close");
         message = "Face is not fit into the camera, please stand a little bit far or change the angle of your screen.";
+        displayText += message;
         console.log(message);
-        displayMeetingRecommendation(message, true);
     }
+
+    displayMeetingRecommendation(displayText, false);
 }
 
 let description = (responses) => {
