@@ -178,29 +178,33 @@ document.getElementById("holaButton1").addEventListener("click", () => {
 
 
 var SceneCheckPeriodicalInterval;
+var sceneCheckActive = false;
 
 document.getElementById("holaButton2").addEventListener("click", () => {
 
-    clearInterval(SceneCheckPeriodicalInterval);
-
-    SceneCheckPeriodicalInterval = setInterval(() => {
-        contextHalo.drawImage(videoHalo, 0, 0, widthHalo, heightHalo);
-        // console.log(canvas_ss.toDataURL());
-
-        canvasHalo.toBlob((blob) => {
-            console.log(blob);
+    if(sceneCheckActive){
+        clearInterval(SceneCheckPeriodicalInterval);
+        sceneCheckActive = false;
+    } else {
+        SceneCheckPeriodicalInterval = setInterval(() => {
+            contextHalo.drawImage(videoHalo, 0, 0, widthHalo, heightHalo);
+            // console.log(canvas_ss.toDataURL());
     
-            blobToStream(blob)
-                .then(readerResult => goToAzureCV(readerResult))
-                .then(result => facePosition(result))
-            // const newImg = document.createElement('img');
-            // const url = URL.createObjectURL(blob);
-            // console.log("BLOB");
-            // console.log(url);
-            // console.log(canvasHalo.toDataURL());
-        });
-    }, 1000);
-
+            canvasHalo.toBlob((blob) => {
+                console.log(blob);
+        
+                blobToStream(blob)
+                    .then(readerResult => goToAzureCV(readerResult))
+                    .then(result => facePosition(result))
+                // const newImg = document.createElement('img');
+                // const url = URL.createObjectURL(blob);
+                // console.log("BLOB");
+                // console.log(url);
+                // console.log(canvasHalo.toDataURL());
+            });
+        }, 1000);
+        sceneCheckActive = true;
+    }
 });
 
 var TakePeriodicalSS;
@@ -256,16 +260,17 @@ document.getElementById("holaSSDescriptionButton").addEventListener("click", () 
 let warnings = [
     "WARNING: Repetitive words can be distracting for persons with cognitive disabilities.",
     "WARNING: Visually impaired people can not see the figure.",
-    "WARNING: Visually impaired people can not see the figure."
+    "WARNING: 3"
 ]
 
 document.addEventListener('keydown', (event) => {
     var keyName = event.key;
-    if(!isNaN(keyName)){ //if is number
-        displayMeetingRecommendation(warnings[keyName], false);
+    if(!isNaN(keyName) & keyName <= warnings.length){ //if is number
+
+        displayMeetingRecommendation(warnings[keyName - 1], false);
         
         var notify = new Notification('Hola', {
-            body: warnings[keyName]
+            body: warnings[keyName - 1]
         });
         
     }
