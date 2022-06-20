@@ -3,7 +3,7 @@
 }
 
 .hola-accordion {
-    background-color: rgb(40, 40, 40);
+    background-color: rgb(20, 20, 20);
     color: #ffffff;
     cursor: pointer;
     padding: 18px;
@@ -22,7 +22,7 @@
   /* Style the accordion panel. Note: hidden by default */
   .hola-panel {
     padding: 0 18px;
-    background-color: rgb(30, 30, 30);
+    background-color: rgb(30, 30, 20);
     display: none;
     overflow: hidden;
   }

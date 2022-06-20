@@ -5,10 +5,11 @@ sideBar.style.width = "300px";
 sideBar.style.right = "0px";
 sideBar.style.top = "110px";
 sideBar.style.position = "fixed";
-sideBar.style.backgroundColor = "#000000";
+sideBar.style.backgroundColor = "rgb(35, 35, 35)";
 sideBar.style.zIndex = "1000";
 sideBar.style.padding = "10px";
 sideBar.id = "HolaSidebar";
+sideBar.style.borderRadius = "10px 0 0px 10px";
 sideBar.style.overflowY = "auto";
 
 document.body.appendChild(sideBar);
@@ -36,8 +37,8 @@ document.getElementById("HolaSidebar").innerHTML = `
 </center>
 <br><br>
 
-<video id="webcamHola1" autoplay="true" width="280px"></video>
-<canvas id="canvasHola1" width="280" height="150"></canvas>
+<video id="webcamHola1" autoplay="true" width="280px" style="display:none"></video>
+<canvas id="canvasHola1" width="280" height="150" style="display:none"></canvas>
 </div>
 
 <button class="hola-accordion">Accessibility Helper - Descriptions for Screen Sharing</button>
@@ -48,16 +49,31 @@ document.getElementById("HolaSidebar").innerHTML = `
 <center>
 <button id="holaSSDescriptionButton" class="hola-black">Enable/Disable Screen Sharing Descriptions</button>
 <br><br>
-<input type="number" name="videoStreamID" id="videoStreamID" value="0" class="hola-black">
+<input type="number" name="videoStreamID" id="videoStreamID" value="0" class="hola-black" style="display:none">
 </center>
 <br><br>
-<canvas id="canvasHola2" width="800" height="500"></canvas>
+<canvas id="canvasHola2" width="800" height="500" style="display:none"></canvas>
 </div>
 
 
 
 <button class="hola-accordion">In-Meeting Accessibility Suggestions</button>
 <div class="hola-panel">
+<br>
+<center>
+<button id="prepareReport" class="hola-black">Prepare Report</button>
+<br><br>
+</center>
+<div id="hola-report" style="display:none">
+<b>Session Time:</b>
+<p id="hola-session-duration"> </p>
+<b>Recommendation Count:</b>
+<p id="hola-recommendation-count"> </p>
+<b>Meeting Score:</b>
+<p id="hola-score"> </p>
+</div>
+<br><br>
+<p><b>Recommendations in this Session</b></p>
 <p id="holaMeetingInsightsLog"></p>
 </div>
 
@@ -74,7 +90,7 @@ infoBox.style.position = "fixed";
 infoBox.style.backgroundColor = "#C4314B";
 infoBox.style.zIndex = "1000";
 infoBox.style.padding = "10px";
-infoBox.style.display = "block";
+infoBox.style.display = "none";
 infoBox.style.borderRadius = "10px";
 infoBox.id = "HolaInfoBox";
 // infoBox.style.display = "none";
@@ -111,6 +127,23 @@ for (i = 0; i < acc.length; i++) {
     
 // })
 
+let say = (m) => {
+    if (speechSynthesis.speaking) {
+        speechSynthesis.cancel();
+    }
+    window.speechSynthesis.speak(new SpeechSynthesisUtterance(m));
+    // var msg = new SpeechSynthesisUtterance();
+    // var voices = window.speechSynthesis.getVoices();
+    // msg.voice = voices[10];
+    // msg.voiceURI = "native";
+    // msg.volume = 1;
+    // msg.rate = 1;
+    // msg.pitch = 0.8;
+    // msg.text = m;
+    // msg.lang = 'en-US';
+    // speechSynthesis.speak(msg);
+  }
+
 var timeoutForHidingMessage;
 
 let displayMeetingRecommendation = (message, bool) => {
@@ -123,14 +156,35 @@ let displayMeetingRecommendation = (message, bool) => {
         box.style.display = "none";
     }, 10000);
 
+    //say(message);
+
     let date = new Date();
     let timeString = date.getHours()+":"+date.getMinutes();
 
     if (bool) {
-        document.getElementById("holaMeetingInsightsLog").innerText += "\n -->>" + timeString + " " + message;
+        document.getElementById("holaMeetingInsightsLog").innerText += "\n -> " + timeString + " " + message + "\n";
     }
 }
 
+
+let recommendationCount = 0;
+const sessionBeginTime = new Date();
+
+document.getElementById("prepareReport").addEventListener("click", () => {
+    
+    document.getElementById("hola-report").style.display = "block";
+
+    document.getElementById("hola-score").innerText = recommendationCount*-10
+
+    document.getElementById("hola-recommendation-count").innerText = recommendationCount;
+
+    let time = new Date();
+    let duration = new Date(time - sessionBeginTime);
+    let durationString = duration.getMinutes() + ":" + duration.getSeconds();
+
+    document.getElementById("hola-session-duration").innerText = durationString;
+
+});
 
 
 // STARTING THE GAME
@@ -252,19 +306,20 @@ document.getElementById("holaSSDescriptionButton").addEventListener("click", () 
 let warnings = [
     "WARNING: Repetitive words can be distracting for persons with cognitive disabilities.",
     "WARNING: Visually impaired people can not see the figure.",
-    "WARNING: 3"
+    "WARNING: 'implement' is a complex word. You can use 'carry out' or 'do'"
 ]
 
 document.addEventListener('keydown', (event) => {
     var keyName = event.key;
     if(!isNaN(keyName) & keyName <= warnings.length){ //if is number
 
-        displayMeetingRecommendation(warnings[keyName - 1], false);
+        displayMeetingRecommendation(warnings[keyName - 1], true);
         
         var notify = new Notification('Hola', {
             body: warnings[keyName - 1]
         });
-        
+
+        recommendationCount += 1;
     }
   }, false);
 
